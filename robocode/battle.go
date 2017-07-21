@@ -1,11 +1,20 @@
 package robocode
 
-type BattleSpec struct {
+import "os/user"
+
+type Battle struct {
 	season string
 	mode string
+	bots []Bot
 }
 
-type Battle interface {
-	RunBattle(BattleSpec) (BattleResult, error)
+func PrepareBattleFile(fs fileSystem, battle *Battle) error {
+	_, err := fs.Create(battle.season)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
+
 
