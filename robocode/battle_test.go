@@ -17,6 +17,7 @@ func Test_Framework(t *testing.T) {
 	assert.Equal(t, 123,123,"Huch")
 }
 
+/*
 func Test_RunBattle_ShouldFailWhenDirectoryForSeasonDoesNotExist(t *testing.T) {
 	mockDirectoryExists := &MockDirectoryExists{}
 	mockDirectoryExists.On("DirectoryExists", "someSeason")
@@ -26,9 +27,13 @@ func Test_RunBattle_ShouldFailWhenDirectoryForSeasonDoesNotExist(t *testing.T) {
 
 	mockDirectoryExists.AssertExpectations(t)
 	assert.NotNil(t, error, "Error is nil")
+	_, err := os.Create("eee")
+	if err != nil {
+		log.Println("create file: ", err)
+		return
+	}
 }
 
-/*
 func Test_RunBattle_ShouldFailWhenDirectoryForModeDoesNotExist(t *testing.T) {
 	mockDirectoryExists := new (MockDirectoryExists)
 	mockDirectoryExists.
