@@ -1,6 +1,8 @@
 package robocode
 
-import "os/user"
+type BattleRunner interface {
+	Run() (BattleResult, error)
+}
 
 type Battle struct {
 	season string
@@ -8,8 +10,17 @@ type Battle struct {
 	bots []Bot
 }
 
-func PrepareBattleFile(fs fileSystem, battle *Battle) error {
-	_, err := fs.Create(battle.season)
+func (b *Battle)Run() (BattleResult, error) {
+	var result BattleResult
+	// TODO prepare battle file
+
+
+	// TODO execute battle
+	return result, nil
+}
+
+func (b *Battle)PrepareBattleFile(fs fileSystem) error {
+	_, err := fs.Create(b.season)
 	if err != nil {
 		return err
 	}

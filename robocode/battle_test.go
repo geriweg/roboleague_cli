@@ -20,13 +20,6 @@ func (m *MockFileSystem) Create(path string) (*os.File, error) {
 	return nil,nil
 }
 
-type MockDirectoryExists struct {mock.Mock}
-func (m *MockDirectoryExists) DirectoryExists(path string) error {
-//	args := m.Called("DirectoryExists", path)
-	args := m.Called()
-	return args.Error(0)
-}
-
 func Test_PrepareBattleFile_ShouldFailOnFileCreationError (t *testing.T) {
 	mockFileSystem := new (MockFileSystem)
 	mockFileSystem.On("Create", "someFile").Return(nil, errors.New("someError"))
@@ -35,7 +28,7 @@ func Test_PrepareBattleFile_ShouldFailOnFileCreationError (t *testing.T) {
 	battle.season = "someSeason"
 	battle.mode = "someMode"
 
-	err := PrepareBattleFile(mockFileSystem, battle)
+	err := battle.PrepareBattleFile(mockFileSystem)
 
 	assert.NotNil(t, err)
 	mockFileSystem.AssertExpectations(t)
@@ -49,7 +42,7 @@ func Test_PrepareBattleFile_ShouldWriteBattleFile (t *testing.T) {
 	battle.season = "someSeason"
 	battle.mode = "someMode"
 
-	err := PrepareBattleFile(mockFileSystem, battle)
+	err := battle.PrepareBattleFile(mockFileSystem)
 
 	assert.Nil(t, err)
 	mockFileSystem.AssertExpectations(t)
